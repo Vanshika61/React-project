@@ -975,14 +975,14 @@ const burgerKing =[
       }
 ]
 
-const RestaurantCard = (props)=>{
+const RestaurantCard = ({restaurant})=>{
   // console.log(props);
     return(
         <div className="card">
-            <img src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"+ props.restaurant.info?.cloudinaryImageId} />
-            <h1>{props.restaurant.info?.name}</h1>
-            <h2>{props.restaurant.info?.cuisines.join(", ")}</h2>
-            <h3>{props.restaurant.info?.avgRating} stars</h3>
+            <img src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"+ restaurant.info?.cloudinaryImageId} />
+            <h1>{restaurant.info?.name}</h1>
+            <h2>{restaurant.info?.cuisines.join(", ")}</h2>
+            <h3>{restaurant.info?.avgRating} stars</h3>
         </div>
     );
 };
