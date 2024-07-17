@@ -24,3 +24,8 @@
 .card>img{
     width: 100%;
 }
+.restaurant-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
