@@ -975,14 +975,14 @@ const burgerKing =[
       }
 ]
 
-const RestaurantCard = ({restaurant})=>{
+const RestaurantCard = ({name, cloudinaryImageId, cuisines, avgRating})=>{
   // console.log(props);
     return(
         <div className="card">
-            <img src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"+ restaurant.info?.cloudinaryImageId} />
-            <h1>{restaurant.info?.name}</h1>
-            <h2>{restaurant.info?.cuisines.join(", ")}</h2>
-            <h3>{restaurant.info?.avgRating} stars</h3>
+            <img src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"+ cloudinaryImageId} />
+            <h1>{name}</h1>
+            <h2>{cuisines.join(", ")}</h2>
+            <h3>{avgRating} stars</h3>
         </div>
     );
 };
@@ -990,14 +990,11 @@ const RestaurantCard = ({restaurant})=>{
 const Body =()=>{
     return(
         <div className="restaurant-list">
-            <RestaurantCard restaurant={burgerKing[0]}/>
-            <RestaurantCard restaurant={burgerKing[1]}/>
-            <RestaurantCard restaurant={burgerKing[2]}/>
-            <RestaurantCard restaurant={burgerKing[3]}/>
-            <RestaurantCard restaurant={burgerKing[4]}/>
-            <RestaurantCard restaurant={burgerKing[5]}/>
-            <RestaurantCard restaurant={burgerKing[6]}/>
-            <RestaurantCard restaurant={burgerKing[7]}/>
+          {
+            burgerKing.map((restaurant)=>{
+              return <RestaurantCard {...restaurant.info} key={restaurant.info.id}/>
+            })
+          }
         </div>
     );
 };
