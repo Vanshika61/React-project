@@ -7,7 +7,7 @@ import  {useEffect, useState}  from "react";
 
 function filterData(searchTxt, restaurants){
   const filterData = restaurants.filter((restaurant)=>
-    restaurant.info.name.includes(searchTxt)
+    restaurant?.info?.name?.toLowerCase()?.includes(searchTxt.toLowerCase())
   );
 
   return filterData;
@@ -16,25 +16,29 @@ function filterData(searchTxt, restaurants){
 const Body =()=>{
 
   const [searchTxt, setSearchTxt] = useState("");
-  const [restaurants, setRestaurants] = useState(restaurantList);
+  const [allRestaurants, setAllRestaurants] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
 
   useEffect(()=>{
     // console.log("useEffect");
-    // Api call 
+    // Api call       best place to call the api inside the useEffect function or hook
     getRestaurants();
   }, []);
 
+  // Function of api calling
   async function getRestaurants(){
     const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.1986817&lng=78.160006&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
     const json = await data.json();
     console.log(json);
-    setRestaurants(json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    // optional chaining
+    setAllRestaurants(json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setFilteredRestaurants(json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
   }
 
   console.log("render()");   // react will re-render everything very quickly // it reloads basically
 
-  return(
+  return (
       <>
       <div className="search-container">
         <input 
@@ -48,16 +52,16 @@ const Body =()=>{
         />
         <button className="search-btn" onClick={()=>{
           // need to filter the data
-          const data = filterData(searchTxt, restaurants);
+          const data = filterData(searchTxt, allRestaurants);
           // update the state - restaurants
-          setRestaurants(data);
+          setFilteredRestaurants(data);
 
         }}>Search</button>
       </div>
 
         <div className="restaurant-list">
           {
-            restaurants.map((restaurant)=>{
+            filteredRestaurants.map((restaurant)=>{
               return <RestaurantCard {...restaurant.info} key={restaurant.info.id}/>
             })
           }
