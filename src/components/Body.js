@@ -3,6 +3,7 @@ import RestaurantCard from "./RestaurantCard";
 // Named import 
 import {restaurantList} from "../constants";
 import  {useEffect, useState}  from "react";
+import Shimmer from "./Shimmer";
 
 
 function filterData(searchTxt, restaurants){
@@ -38,7 +39,7 @@ const Body =()=>{
 
   console.log("render()");   // react will re-render everything very quickly // it reloads basically
 
-  return (
+  return (allRestaurants.length === 0)? (<Shimmer/>) :(
       <>
       <div className="search-container">
         <input 
