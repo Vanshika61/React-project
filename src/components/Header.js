@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
+import logoImage from "./assets/Logo.jpg";
 
 const Logo=()=>{
     return(
-        <a href="/">
-            <img className="logo" src="https://static.vecteezy.com/system/resources/previews/010/816/011/non_2x/food-house-logo-logo-template-vector.jpg" alt="logo" />
-        </a>
+        <Link to="/">
+            <img className="logo" src={logoImage} alt="logo" />
+        </Link>
     );
 };
 

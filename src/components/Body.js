@@ -4,14 +4,8 @@ import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-
-function filterData(searchTxt, restaurants) {
-  const filterData = restaurants.filter((restaurant) =>
-    restaurant?.info?.name?.toLowerCase()?.includes(searchTxt.toLowerCase())
-  );
-
-  return filterData;
-}
+import { filterData } from "./utility/helper";
+import useOnline from "./utility/useOnline";
 
 const Body = () => {
   const [searchTxt, setSearchTxt] = useState("");
@@ -37,10 +31,12 @@ const Body = () => {
       json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   }
-
   // console.log("render()"); // react will re-render everything very quickly // it reloads basically
 
+  
+  const status = useOnline();
   //Early return
+  if(!status) return <h1>🔴 Offline, Check your Internet connection</h1>;
   if(!allRestaurants) return null;
 
   return allRestaurants.length === 0 ? (

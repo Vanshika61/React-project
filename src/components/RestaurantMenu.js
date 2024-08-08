@@ -1,35 +1,19 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 // import { IMG_CDN_URL } from "../constants";
 import { useParams } from "react-router-dom";
 import { IMG_CDN_URL } from "../constants";
+import Shimmer from "./Shimmer";
+import useRestaurants from "./utility/useRestaurants";
 
 const RestaurantMenu = () => {
     // How to read dynamic URL params 
     const params = useParams();
     const {resId} = params;
 
-    const [restaurantDetails, setRestaurantDetails] = useState({});
-    const [dishMenu, setDishMenu] = useState([]);
+    const [restaurantDetails,dishMenu] = useRestaurants(resId);
 
-    // By using these three console.logs debugg the api link 
-    // console.log(params);
-    // console.log({resId});
-    // console.log(resId);
-
-    useEffect(()=>{
-        getApiData();
-    }, []);
-
-    async function getApiData(){
-        const data = await fetch("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=26.1986817&lng=78.160006&restaurantId="+ resId +"&catalog_qa=undefined&submitAction=ENTER");
-        const json = await data.json();
-        // console.log(json.data.cards[4].groupedCard.cardGroupMap.REGULAR.cards);
-        setRestaurantDetails(json?.data?.cards[2]?.card?.card?.info);
-        setDishMenu(json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards);
-    };
-
-
-  return (
+    
+  return dishMenu.length===0 ? <Shimmer/> : (
     <div className="menu-page">
       <div>
         <h1>restaurant id : {resId}</h1>
