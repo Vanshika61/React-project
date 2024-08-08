@@ -1,4 +1,17 @@
+import { useEffect } from "react";
+
 const Profile = (props)=>{
+
+    // useEffect(()=>{
+    //     const timer = setInterval(() => {
+    //         console.log("Hello Vanshika, Accenture is calling you");
+    //       }, 1000);
+
+    //       return()=>{
+    //         clearInterval(timer);
+    //         console.log("useEffect return kind of unmounting")
+    //       }
+    // },[]);
     return(
         <>
         <hr />

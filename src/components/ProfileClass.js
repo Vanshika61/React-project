@@ -23,6 +23,10 @@ class ProfileClass extends React.Component{
 
     this.setState({userInfo:json});
     console.log("componentDidMount");
+
+    // this.timer = setInterval(() => {
+    //   console.log("Hello Vanshika, Accenture is calling you");
+    // }, 1000);
   }
 
   componentDidUpdate(){
@@ -33,7 +37,7 @@ class ProfileClass extends React.Component{
 
   componentWillUnmount(){
     // best place to API call
-
+    // clearInterval(this.timer);
     console.log("componentWillUnmount");
   }
 
