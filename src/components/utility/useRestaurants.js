@@ -23,7 +23,7 @@ const useRestaurants = (resId) => {
     };
 
 
-    return [restaurantDetails,dishMenu];
+    return [restaurantDetails, dishMenu];
 }
 
 export default useRestaurants;
