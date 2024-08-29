@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import logoImage from "./assets/Logo.jpg";
+import { useContext } from "react";
+import UserContext from "./utility/UserContext";
 
 const Logo=()=>{
     return(
@@ -11,6 +13,8 @@ const Logo=()=>{
 
 
 const Header =()=>{
+
+    const {user} = useContext(UserContext);
     return(
         <div className="flex justify-between bg-gray-100 shadow-lg">
             <Logo/>         {/* Component composition or composing component*/}
@@ -23,6 +27,7 @@ const Header =()=>{
                     <li className="px-2">Cart</li>
                 </ul>
             </div>
+            <span className="flex py-10 px-2 font-bold text-amber-900">{user.name}</span>
         </div>
     );
 };

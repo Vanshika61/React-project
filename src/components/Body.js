@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { filterData } from "./utility/helper";
 import useOnline from "./utility/useOnline";
 
-const Body = ({user}) => {
+const Body = () => {
   const [searchTxt, setSearchTxt] = useState("");
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
@@ -69,7 +69,7 @@ const Body = ({user}) => {
       <div className="flex flex-wrap justify-center">
         {filteredRestaurants.length===0 ? (<h1>Filtered Restaurant not found</h1>) : (filteredRestaurants.map((restaurant) => {
           return (
-            <Link key={restaurant.info.id} to={"/restaurant/" + restaurant.info.id}><RestaurantCard {...restaurant.info} user={user} /></Link>
+            <Link key={restaurant.info.id} to={"/restaurant/" + restaurant.info.id}><RestaurantCard {...restaurant.info} /></Link>
           );
         }))}
       </div>

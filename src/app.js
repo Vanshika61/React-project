@@ -11,20 +11,21 @@ import Contact from "./components/Contact";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Profile from "./components/Profile"
 import Shimmer from "./components/Shimmer";
+import UserContext from "./components/utility/UserContext";
 // import Instamart from "./components/Instamart";
 // dynamic import // import like this instead of above import for chunking or code splitting or lazy loading
 const Instamart = lazy(()=> import("./components/Instamart"));
 
 const AppLayout =()=>{
 
-  const [user, setUser] = useState({name: "Vanshika Agrawal", email: "dummy@gmail.com"});
+  const [user, setUser] = useState({name: "Vanshika Agrawal", email: "abc@gmail.com"});
 
     return (
-        <>
+        <UserContext.Provider value={{user:user}}>
           <Header/>
           <Outlet/>
           <Footer/>
-        </>
+        </UserContext.Provider>
     );
 };
 
@@ -36,7 +37,7 @@ const appRoute = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Body user={{name: "Vanshika Agrawal", email: "dummy@gmail.com"}}/>
+        element: <Body/>
       },
       {
         path: "/about",
