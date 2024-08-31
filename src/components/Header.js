@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import logoImage from "./assets/Logo.jpg";
 import { useContext } from "react";
 import UserContext from "./utility/UserContext";
+import {useSelector} from "react-redux";
 
 const Logo=()=>{
     return(
@@ -15,6 +16,7 @@ const Logo=()=>{
 const Header =()=>{
 
     const {user} = useContext(UserContext);
+    const cartItems = useSelector(store => store.cart.item)
     return(
         <div className="flex justify-between bg-gray-100 shadow-lg">
             <Logo/>         {/* Component composition or composing component*/}
@@ -24,7 +26,7 @@ const Header =()=>{
                     <li className="px-2"><Link to="/about">About</Link></li>
                     <li className="px-2"><Link to="/contact">Contact</Link></li>
                     <li className="px-2"><Link to="/instamart">Instamart</Link></li>
-                    <li className="px-2">Cart</li>
+                    <li className="px-2">Cart - {cartItems.length} items</li>
                 </ul>
             </div>
             <span className="flex py-10 px-2 font-bold text-amber-900">{user.name}</span>
