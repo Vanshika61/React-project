@@ -21,7 +21,7 @@ const AppLayout =()=>{
   const [user, setUser] = useState({name: "Vanshika Agrawal", email: "abc@gmail.com"});
 
     return (
-        <UserContext.Provider value={{user:user}}>
+        <UserContext.Provider value={{user:user, setUser:setUser}}>
           <Header/>
           <Outlet/>
           <Footer/>
