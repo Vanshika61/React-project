@@ -12,6 +12,8 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import Profile from "./components/Profile"
 import Shimmer from "./components/Shimmer";
 import UserContext from "./components/utility/UserContext";
+import {Provider} from "react-redux";
+import store from "./components/utility/store";
 // import Instamart from "./components/Instamart";
 // dynamic import // import like this instead of above import for chunking or code splitting or lazy loading
 const Instamart = lazy(()=> import("./components/Instamart"));
@@ -21,11 +23,13 @@ const AppLayout =()=>{
   const [user, setUser] = useState({name: "Vanshika Agrawal", email: "abc@gmail.com"});
 
     return (
+      <Provider store={store}>
         <UserContext.Provider value={{user:user, setUser:setUser}}>
           <Header/>
           <Outlet/>
           <Footer/>
         </UserContext.Provider>
+      </Provider>
     );
 };
 
