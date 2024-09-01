@@ -17,8 +17,8 @@ const Header =()=>{
 
     const {user} = useContext(UserContext);
     const cartItems = useSelector(store => store.cart.item);
-    console.log(cartItems);
-    
+    // console.log(cartItems);
+
     return(
         <div className="flex justify-between bg-gray-100 shadow-lg">
             <Logo/>         {/* Component composition or composing component*/}
