@@ -14,6 +14,7 @@ import Shimmer from "./components/Shimmer";
 import UserContext from "./components/utility/UserContext";
 import {Provider} from "react-redux";
 import store from "./components/utility/store";
+import Cart from "./components/Cart";
 // import Instamart from "./components/Instamart";
 // dynamic import // import like this instead of above import for chunking or code splitting or lazy loading
 const Instamart = lazy(()=> import("./components/Instamart"));
@@ -72,7 +73,11 @@ const appRoute = createBrowserRouter([
             <Instamart/>
           </Suspense>
         ),
-      }
+      },
+      {
+        path: "/cart",
+        element: <Cart/>
+      },
     ]
   },
 ]);

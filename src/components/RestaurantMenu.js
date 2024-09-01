@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { IMG_CDN_URL } from "../constants";
 import Shimmer from "./Shimmer";
 import useRestaurants from "./utility/useRestaurants";
+import { useDispatch } from "react-redux";
+import { addItems } from "./utility/cartSlice";
 
 const RestaurantMenu = () => {
     // How to read dynamic URL params 
@@ -12,9 +14,15 @@ const RestaurantMenu = () => {
 
     const [restaurantDetails,dishMenu] = useRestaurants(resId);
 
+    const dispatch = useDispatch();
+    const handleAddItem =(item)=>{
+      dispatch(addItems(item));
+      // console.log(item);
+    };
+
     
   return dishMenu.length===0 ? <Shimmer/> : (
-    <div className="menu-page">
+    <div className="flex">
       <div>
         <h1>restaurant id : {resId}</h1>
         <h2>{restaurantDetails?.name}</h2>
@@ -24,14 +32,14 @@ const RestaurantMenu = () => {
         <h3>Ratings : {restaurantDetails?.avgRating} stars</h3>
         <h3>Cost For Two : {restaurantDetails?.costForTwoMessage}</h3>
       </div>
-      <div>
-        <h1>Menu</h1>
+      <div className="p-6 m-6">
+        <h1 className="font-bold text-xl">Menu</h1>
         <ul>
           {Object.values(dishMenu).map((item, index) => {
             return (
               <ul key={index}>
                   {item?.card?.card?.itemCards?.map((i) => {
-                    return <li key={i.card?.info?.id}>{i.card?.info?.name}</li>;
+                    return <li key={i.card?.info?.id}>{i.card?.info?.name} <button className="p-2 m-2 bg-green-200" onClick={()=> handleAddItem(i.card?.info)}>Add</button></li>;
                   })}
               </ul>
             );
